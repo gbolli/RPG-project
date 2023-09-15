@@ -36,7 +36,12 @@ public class Mover : MonoBehaviour
         bool hasHit = Physics.Raycast(ray, out hit);
         if (hasHit)
         {
-            GetComponent<UnityEngine.AI.NavMeshAgent>().destination = hit.point;
+            MoveTo(hit.point);
         }
+    }
+
+    public void MoveTo(Vector3 destination)
+    {
+        GetComponent<UnityEngine.AI.NavMeshAgent>().destination = destination;
     }
 }
