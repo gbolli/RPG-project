@@ -30,6 +30,12 @@ namespace RPG.Movement
         public void MoveTo(Vector3 destination)
         {
             GetComponent<UnityEngine.AI.NavMeshAgent>().destination = destination;
+            navmeshAgent.isStopped = false;
+        }
+
+        public void Stop()
+        {
+            navmeshAgent.isStopped = true;
         }
     }
 }
