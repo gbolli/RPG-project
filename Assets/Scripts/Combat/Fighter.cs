@@ -13,14 +13,19 @@ namespace RPG.Combat
 
         private void Update()
         {
-            bool isInRange = Vector3.Distance(transform.position, target.position) <= weaponRange;
-            if (isInRange) GetComponent<Mover>().Stop();
-            else if (target != null) GetComponent<Mover>().MoveTo(target.position);
+            if (target == null) return;
+            if (Vector3.Distance(transform.position, target.position) <= weaponRange) GetComponent<Mover>().Stop(); 
+            else GetComponent<Mover>().MoveTo(target.position);
         }
 
         public void Attack(CombatTarget combatTarget)
         {
             target = combatTarget.transform;
+        }
+
+        public void Cancel()
+        {
+            target = null;
         }
     }
 }
