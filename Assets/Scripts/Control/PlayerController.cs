@@ -15,7 +15,7 @@ namespace RPG.Control
             if (InteractWithMovement()) return;
         }
 
-        private bool InteractWithCombat()
+        private bool InteractWithCombat()  // check raycast to target for combat
         {
             RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
             foreach (RaycastHit hit in hits)
@@ -33,7 +33,7 @@ namespace RPG.Control
             return false;
         }
 
-        private bool InteractWithMovement()
+        private bool InteractWithMovement()  // raycast to move if not on enemy target (and cancel attack)
         {
             RaycastHit hit;
             bool hasHit = Physics.Raycast(GetMouseRay(), out hit);

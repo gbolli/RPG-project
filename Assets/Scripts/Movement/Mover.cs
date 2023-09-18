@@ -21,19 +21,19 @@ namespace RPG.Movement
             UpdateAnimator();
         }
 
-        private void UpdateAnimator()
+        private void UpdateAnimator()   // set speed of animation to match player velocity
         {
             Vector3 velocity = transform.InverseTransformDirection(navmeshAgent.velocity);  // change from global to local space
             animator.SetFloat("forwardSpeed", velocity.z);  // z is forward
         }
 
-        public void MoveTo(Vector3 destination)
+        public void MoveTo(Vector3 destination)   // move to destination and restart navmeshAgent if stopped
         {
             GetComponent<UnityEngine.AI.NavMeshAgent>().destination = destination;
             navmeshAgent.isStopped = false;
         }
 
-        public void Stop()
+        public void Stop()  // stop navmeshAgent
         {
             navmeshAgent.isStopped = true;
         }

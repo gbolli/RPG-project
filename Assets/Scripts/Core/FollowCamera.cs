@@ -10,7 +10,7 @@ namespace RPG.Core
 
         void LateUpdate()
         {
-            transform.position = target.position;
+            transform.position = target.position;  // get camera to follow player
         }
     }
 }
