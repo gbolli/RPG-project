@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour
+    public class Fighter : MonoBehaviour, IAction
     {
         [SerializeField] float weaponRange = 2f;
 
@@ -15,7 +15,7 @@ namespace RPG.Combat
         private void Update()
         {
             if (target == null) return;   // if not attacking then return
-            if (Vector3.Distance(transform.position, target.position) <= weaponRange) GetComponent<Mover>().Stop(); // if within attacking distance, stop
+            if (Vector3.Distance(transform.position, target.position) <= weaponRange) GetComponent<Mover>().Cancel(); // if within attacking distance, stop
             else GetComponent<Mover>().MoveTo(target.position);  // if not within attacking distance, keep moving
         }
 
