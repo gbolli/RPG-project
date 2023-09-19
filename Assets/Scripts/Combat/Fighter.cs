@@ -15,8 +15,17 @@ namespace RPG.Combat
         private void Update()
         {
             if (target == null) return;   // if not attacking then return
-            if (Vector3.Distance(transform.position, target.position) <= weaponRange) GetComponent<Mover>().Cancel(); // if within attacking distance, stop
+            if (Vector3.Distance(transform.position, target.position) <= weaponRange)
+            {
+                GetComponent<Mover>().Cancel(); // if within attacking distance, stop
+                AttackBehavior();
+            }
             else GetComponent<Mover>().MoveTo(target.position);  // if not within attacking distance, keep moving
+        }
+
+        private void AttackBehavior()
+        {
+            GetComponent<Animator>().SetTrigger("attack");  // Trigger attack animation
         }
 
         public void Attack(CombatTarget combatTarget) // set target to attack
@@ -28,6 +37,11 @@ namespace RPG.Combat
         public void Cancel()  // cancel attack
         {
             target = null;
+        }
+
+        void Hit() // Animation Event
+        {
+            print("I hit you!");
         }
     }
 }
