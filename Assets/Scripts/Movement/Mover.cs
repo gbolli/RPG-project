@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using RPG.Combat;
+using RPG.Core;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -25,6 +27,13 @@ namespace RPG.Movement
         {
             Vector3 velocity = transform.InverseTransformDirection(navmeshAgent.velocity);  // change from global to local space
             animator.SetFloat("forwardSpeed", velocity.z);  // z is forward
+        }
+
+        public void StartMoveAction(Vector3 destination)  // Cancel attack action and start MoveTo action
+        {
+            GetComponent<ActionScheduler>().StartAction(this);
+            GetComponent<Fighter>().Cancel();
+            MoveTo(destination);
         }
 
         public void MoveTo(Vector3 destination)   // move to destination and restart navmeshAgent if stopped
