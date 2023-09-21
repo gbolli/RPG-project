@@ -2154,6 +2154,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2948380849869219736, guid: 5b90fc391ffd841adb16f7ec9eb5bcef, type: 3}
+      propertyPath: timeBetweenAttacks
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5068934975311353428, guid: 5b90fc391ffd841adb16f7ec9eb5bcef, type: 3}
       propertyPath: m_Name
       value: Player
