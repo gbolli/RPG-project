@@ -53,6 +53,11 @@ namespace RPG.Combat
             target = null;
         }
 
+        public bool CanAttack(CombatTarget target)
+        {
+            return target != null && !target.GetComponent<Health>().IsDead();
+        }
+
         void Hit() // Animation Event
         {
             target.TakeDamage(weaponDamage);   // Deal damage on attack hit
