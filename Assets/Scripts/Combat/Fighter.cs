@@ -31,6 +31,8 @@ namespace RPG.Combat
 
         private void AttackBehavior()
         {
+            transform.LookAt(target.transform); // look at target when attacking
+
             if (timeSinceLastAttack > timeBetweenAttacks)
             {
                 GetComponent<Animator>().SetTrigger("attack");  // Trigger attack animation and Hit() event
