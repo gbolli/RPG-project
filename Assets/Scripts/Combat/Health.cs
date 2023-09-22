@@ -9,6 +9,10 @@ namespace RPG.Combat
         [SerializeField] int health = 100;
 
         bool isDead = false;
+        public bool IsDead()
+        {
+            return isDead;
+        }
 
         public void TakeDamage(int damage)  //  Take damage to health
         {
