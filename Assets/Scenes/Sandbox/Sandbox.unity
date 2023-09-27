@@ -667,6 +667,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3142380043802095595, guid: 521577870fcf34cbcad5e4749e73f240, type: 3}
+      propertyPath: chaseDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3521652134210173226, guid: 521577870fcf34cbcad5e4749e73f240, type: 3}
       propertyPath: m_BaseOffset
       value: 0
@@ -1144,6 +1148,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3142380043802095595, guid: 521577870fcf34cbcad5e4749e73f240, type: 3}
+      propertyPath: chaseDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8788125216246030735, guid: 521577870fcf34cbcad5e4749e73f240, type: 3}
       propertyPath: health
       value: 25
@@ -1486,6 +1494,10 @@ PrefabInstance:
     - target: {fileID: 2580486852859621438, guid: 521577870fcf34cbcad5e4749e73f240, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3142380043802095595, guid: 521577870fcf34cbcad5e4749e73f240, type: 3}
+      propertyPath: chaseDistance
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8788125216246030735, guid: 521577870fcf34cbcad5e4749e73f240, type: 3}
       propertyPath: health
