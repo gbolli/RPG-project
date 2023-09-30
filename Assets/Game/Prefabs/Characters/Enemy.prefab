@@ -86,6 +86,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 8028253082330881197, guid: 5b90fc391ffd841adb16f7ec9eb5bcef, type: 3}
+      propertyPath: m_Speed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8969698552382019001, guid: 5b90fc391ffd841adb16f7ec9eb5bcef, type: 3}
       propertyPath: m_LocalPosition.x
       value: 31.105843
@@ -157,6 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f6f6da267034d44a9067158feb1396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chaseDistance: 5
 --- !u!114 &1899352629149008682
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -47,7 +47,7 @@ namespace RPG.Combat
             GetComponent<Animator>().SetTrigger("attack");  // Trigger attack animation and Hit() event
         }
 
-        public void Attack(CombatTarget combatTarget) // set target to attack
+        public void Attack(GameObject combatTarget) // set target to attack
         {
             GetComponent<ActionScheduler>().StartAction(this);
             target = combatTarget.GetComponent<Health>();
@@ -65,7 +65,7 @@ namespace RPG.Combat
             GetComponent<Animator>().SetTrigger("stopAttack");  // stop the attack animation
         }
 
-        public bool CanAttack(CombatTarget target)
+        public bool CanAttack(GameObject target)
         {
             return target != null && !target.GetComponent<Health>().IsDead();
         }
