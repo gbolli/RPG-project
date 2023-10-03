@@ -76,7 +76,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2756430584458560520, guid: 5b90fc391ffd841adb16f7ec9eb5bcef, type: 3}
       propertyPath: health
-      value: 40
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2948380849869219736, guid: 5b90fc391ffd841adb16f7ec9eb5bcef, type: 3}
       propertyPath: weaponRange
@@ -92,7 +92,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8028253082330881197, guid: 5b90fc391ffd841adb16f7ec9eb5bcef, type: 3}
       propertyPath: m_Speed
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8969698552382019001, guid: 5b90fc391ffd841adb16f7ec9eb5bcef, type: 3}
       propertyPath: m_LocalPosition.x
