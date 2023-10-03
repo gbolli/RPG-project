@@ -10,13 +10,16 @@ namespace RPG.Control
     public class AIController : MonoBehaviour
     {
         [SerializeField] float chaseDistance = 5f;
+        float suspicionTime = 5f;
 
         GameObject player;
         Fighter fighter;
         Mover mover;
         Health health;
 
+        // enemy state
         Vector3 guardPosition;
+        float timeSinceLastSawPlayer = Mathf.Infinity;
 
         private void Start()
         {
@@ -30,16 +33,23 @@ namespace RPG.Control
 
         private void Update()
         {
+            timeSinceLastSawPlayer += Time.deltaTime;
+
             if (health.IsDead()) return;
 
             // Check if player in range
-            if (InAttackRangeOfPlayer() && fighter.CanAttack(player))
+            if (InAttackRangeOfPlayer() && fighter.CanAttack(player))  // Attack state
             {
+                timeSinceLastSawPlayer = 0;
                 fighter.Attack(player);
+            }
+            else if (timeSinceLastSawPlayer < suspicionTime)  // Suspicious state
+            {
+                GetComponent<ActionScheduler>().CancelCurrentAction();  // Cancel from action scheduler
             }
             else
             {
-                mover.StartMoveAction(guardPosition);
+                mover.StartMoveAction(guardPosition);  // Return to guard state
             }
         }
 
