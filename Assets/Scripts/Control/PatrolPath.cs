@@ -12,8 +12,15 @@ namespace RPG.Control
         {
             for (int i = 0; i < transform.childCount; i++)
             {
-                Gizmos.DrawSphere(transform.GetChild(i).position, waypointGizmoRadius);
+                int nextIndex = i < transform.childCount - 1 ? i + 1 : 0;  // if last index then loop to 0
+                Gizmos.DrawSphere(GetWaypoint(i), waypointGizmoRadius);
+                Gizmos.DrawLine(GetWaypoint(i), GetWaypoint(nextIndex));
             }
+        }
+
+        private Vector3 GetWaypoint(int i)
+        {
+            return transform.GetChild(i).position;
         }
     }
 }
