@@ -26,7 +26,7 @@ namespace RPG.Combat
                 GetComponent<Mover>().Cancel(); // if within attacking distance, stop
                 AttackBehavior();
             }
-            else GetComponent<Mover>().MoveTo(target.transform.position);  // if not within attacking distance, keep moving
+            else GetComponent<Mover>().MoveTo(target.transform.position, 1f);  // if not within attacking distance, keep moving
         }
 
         private void AttackBehavior()

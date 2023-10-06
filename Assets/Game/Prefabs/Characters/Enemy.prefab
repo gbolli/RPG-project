@@ -74,6 +74,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1869316461384907502, guid: 5b90fc391ffd841adb16f7ec9eb5bcef, type: 3}
+      propertyPath: maxSpeed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 2756430584458560520, guid: 5b90fc391ffd841adb16f7ec9eb5bcef, type: 3}
       propertyPath: health
       value: 25
@@ -96,15 +100,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8969698552382019001, guid: 5b90fc391ffd841adb16f7ec9eb5bcef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 31.105843
+      value: 22.6
       objectReference: {fileID: 0}
     - target: {fileID: 8969698552382019001, guid: 5b90fc391ffd841adb16f7ec9eb5bcef, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00000071525574
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8969698552382019001, guid: 5b90fc391ffd841adb16f7ec9eb5bcef, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 22.68584
+      value: -26.1
       objectReference: {fileID: 0}
     - target: {fileID: 8969698552382019001, guid: 5b90fc391ffd841adb16f7ec9eb5bcef, type: 3}
       propertyPath: m_LocalRotation.w
@@ -166,6 +170,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseDistance: 5
+  suspicionTime: 5
+  waypointDwellTime: 3
+  waypointTolerance: 1
+  patrolPath: {fileID: 0}
+  patrolSpeedFraction: 0.2
 --- !u!114 &1899352629149008682
 MonoBehaviour:
   m_ObjectHideFlags: 0
