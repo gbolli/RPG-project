@@ -235,7 +235,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 100
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 3059316078101816508}
@@ -1401,6 +1401,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2580486852859621438, guid: 521577870fcf34cbcad5e4749e73f240, type: 3}
   m_PrefabInstance: {fileID: 671525002}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1620608356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1620608357}
+  m_Layer: 0
+  m_Name: Cinematics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1620608357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620608356}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 42.733086, y: 1.8148862, z: 15.849152}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1684082736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2176,3 +2207,4 @@ SceneRoots:
   - {fileID: 1448173563}
   - {fileID: 1402494399}
   - {fileID: 1993070311}
+  - {fileID: 1620608357}
