@@ -42,9 +42,6 @@ namespace RPG.Movement
 
         public void MoveTo(Vector3 destination, float speedFraction)   // move to destination and restart navmeshAgent if stopped
         {
-            Debug.Log("called MoveTo parent: " + transform.name);
-            Debug.Log(destination);
-            Debug.Log(speedFraction);
             navmeshAgent.destination = destination;
             navmeshAgent.speed = maxSpeed * Mathf.Clamp01(speedFraction);  // force speedFraction between 0 - 1
             navmeshAgent.isStopped = false;
