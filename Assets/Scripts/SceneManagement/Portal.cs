@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 
 namespace RPG.SceneManagement
 {
@@ -35,7 +36,8 @@ namespace RPG.SceneManagement
         private void UpdatePlayer(Portal otherPortal)
         {
             GameObject player = GameObject.FindWithTag("Player");
-            player.transform.position = otherPortal.spawnPoint.transform.position;
+            player.GetComponent<NavMeshAgent>().Warp(otherPortal.spawnPoint.transform.position);
+            // player.transform.position = otherPortal.spawnPoint.transform.position;
             player.transform.rotation = otherPortal.spawnPoint.transform.rotation;
         }
 
