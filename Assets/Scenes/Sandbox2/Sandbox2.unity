@@ -1513,6 +1513,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3608707429959291990, guid: eeca2935d4fbf43c581ca8c3f3ec6b3e, type: 3}
+      propertyPath: destination
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6526983222912737000, guid: eeca2935d4fbf43c581ca8c3f3ec6b3e, type: 3}
       propertyPath: m_LocalScale.x
       value: 24.691786
