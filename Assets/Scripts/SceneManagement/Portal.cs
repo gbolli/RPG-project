@@ -13,9 +13,9 @@ namespace RPG.SceneManagement
             A1, A2, B1, B2, C1, C2, C3
         }
 
-        [SerializeField] int sceneToLoad;
-        [SerializeField] Transform spawnPoint;
+        [SerializeField] int sceneToLoad = -1;
         [SerializeField] DestinationIdentifier destination;
+        [SerializeField] Transform spawnPoint;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -27,6 +27,12 @@ namespace RPG.SceneManagement
 
         private IEnumerator Transition()
         {
+            if (sceneToLoad < 0)
+            {
+                Debug.Log("SceneToLoad is not set");
+                yield break;   // yield break needed to escape from IEnumerator (instead of return)
+            }
+
             DontDestroyOnLoad(gameObject);  // prevent destroy when new scene is loaded
             // Portals need to be at scene root level for DontDestroyOnLoad
             
