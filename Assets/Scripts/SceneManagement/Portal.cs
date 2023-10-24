@@ -16,6 +16,9 @@ namespace RPG.SceneManagement
         [SerializeField] int sceneToLoad = -1;
         [SerializeField] DestinationIdentifier destination;
         [SerializeField] Transform spawnPoint;
+        [SerializeField] float fadeOutTime = 0.5f;
+        [SerializeField] float fadeInTime = 1f;
+        [SerializeField] float fadeWaitTime = 0.5f;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -35,11 +38,16 @@ namespace RPG.SceneManagement
 
             DontDestroyOnLoad(gameObject);  // prevent destroy when new scene is loaded
             // Portals need to be at scene root level for DontDestroyOnLoad
-            
+            Fader fader = FindObjectOfType<Fader>();
+
+            yield return fader.FadeOut(fadeOutTime);
             yield return SceneManager.LoadSceneAsync(sceneToLoad);  // LoadSceneAsync return object that unity will use
 
             Portal otherPortal = GetTheOtherPortal();
             UpdatePlayer(otherPortal);
+
+            yield return new WaitForSeconds(fadeWaitTime);
+            yield return fader.FadeIn(fadeInTime);
 
             Destroy(gameObject);  // destroy to clean up after code is run
         }
