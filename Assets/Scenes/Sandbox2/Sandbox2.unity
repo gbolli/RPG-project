@@ -992,7 +992,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7820127825235259450, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
       propertyPath: uniqueIdentifier
-      value: e1f27841-a36a-4b15-84ea-2e2d2d1ad777
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 9217750782884266961, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
       propertyPath: m_Name
