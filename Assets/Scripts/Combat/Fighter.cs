@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using RPG.Core;
@@ -11,9 +12,15 @@ namespace RPG.Combat
         [SerializeField] float weaponRange = 2f;
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] int weaponDamage = 15;
+        [SerializeField] GameObject weaponPrefab = null;
+        [SerializeField] Transform handTransform = null;
 
         float timeSinceLastAttack = Mathf.Infinity;
         Health target;
+
+        private void Start() {
+            SpawnWeapon();
+        }
 
         private void Update()
         {
@@ -27,6 +34,11 @@ namespace RPG.Combat
                 AttackBehavior();
             }
             else GetComponent<Mover>().MoveTo(target.transform.position, 1f);  // if not within attacking distance, keep moving
+        }
+
+        private void SpawnWeapon()
+        {
+            Instantiate(weaponPrefab, handTransform);
         }
 
         private void AttackBehavior()
