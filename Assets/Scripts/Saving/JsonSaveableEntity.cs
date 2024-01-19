@@ -42,7 +42,7 @@ namespace RPG.Saving
                 string component = jsonSaveable.GetType().ToString();
                 if (stateDict.ContainsKey(component))
                 {
-
+                    
                     Debug.Log($"{name} Restore {component} =>{stateDict[component].ToString()}");
                     jsonSaveable.RestoreFromJToken(stateDict[component]);
                 }

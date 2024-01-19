@@ -41,7 +41,18 @@ namespace RPG.SceneManagement
             Fader fader = FindObjectOfType<Fader>();
 
             yield return fader.FadeOut(fadeOutTime);
+
+            // Save current level before portal
+            SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
+            wrapper.Save();
+
             yield return SceneManager.LoadSceneAsync(sceneToLoad);  // LoadSceneAsync return object that unity will use
+            
+            // Need time to load references before loading save file (TODO: look for better solutiuon)
+            yield return new WaitForSeconds(0.5f);
+
+            // Load stats before new location
+            wrapper.Load();
 
             Portal otherPortal = GetTheOtherPortal();
             UpdatePlayer(otherPortal);

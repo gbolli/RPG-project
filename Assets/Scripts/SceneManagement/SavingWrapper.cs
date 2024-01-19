@@ -19,12 +19,12 @@ namespace RPG.SceneManagement
             }
         }
 
-        private void Load()
+        public void Load()
         {
             GetComponent<JsonSavingSystem>().Load(defaultSaveFile);
         }
 
-        private void Save()
+        public void Save()
         {
             GetComponent<JsonSavingSystem>().Save(defaultSaveFile);
         }
