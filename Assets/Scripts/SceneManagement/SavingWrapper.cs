@@ -8,6 +8,9 @@ namespace RPG.SceneManagement
 {
     public class SavingWrapper : MonoBehaviour
     {
+        IEnumerator Start() {
+            yield return GetComponent<JsonSavingSystem>().LoadLastScene(defaultSaveFile);
+        }
         const string defaultSaveFile = "save";
 
         private void Update() {

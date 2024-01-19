@@ -51,11 +51,14 @@ namespace RPG.SceneManagement
             // Need time to load references before loading save file (TODO: look for better solutiuon)
             yield return new WaitForSeconds(0.5f);
 
-            // Load stats before new location
+            // Load stats (player health, etc) before new location
             wrapper.Load();
 
             Portal otherPortal = GetTheOtherPortal();
             UpdatePlayer(otherPortal);
+
+            // Save position in new scene
+            wrapper.Save();
 
             yield return new WaitForSeconds(fadeWaitTime);
             yield return fader.FadeIn(fadeInTime);
