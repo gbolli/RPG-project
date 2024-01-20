@@ -20,13 +20,18 @@ namespace RPG.Saving
         public IEnumerator LoadLastScene(string saveFile)
         {
             JObject state = LoadJsonFromFile(saveFile);
+
             IDictionary<string, JToken> stateDict = state; 
+
             int buildIndex = SceneManager.GetActiveScene().buildIndex;
+
             if (stateDict.ContainsKey("lastSceneBuildIndex"))
             {
                 buildIndex = (int)stateDict["lastSceneBuildIndex"];
             }
+
             yield return SceneManager.LoadSceneAsync(buildIndex);
+
             RestoreFromToken(state);
         }
 
@@ -119,6 +124,7 @@ namespace RPG.Saving
             foreach (JsonSaveableEntity saveable in FindObjectsOfType<JsonSaveableEntity>())
             {
                 string id = saveable.GetUniqueIdentifier();
+
                 if (stateDict.ContainsKey(id))
                 {
                     saveable.RestoreFromJToken(stateDict[id]);
