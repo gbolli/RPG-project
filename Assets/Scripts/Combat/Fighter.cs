@@ -9,12 +9,11 @@ namespace RPG.Combat
 {
     public class Fighter : MonoBehaviour, IAction
     {
-        [SerializeField] float weaponRange = 2f;
+        //[SerializeField] float weaponRange = 2f;
         [SerializeField] float timeBetweenAttacks = 1f;
-        [SerializeField] int weaponDamage = 15;
-        [SerializeField] GameObject weaponPrefab = null;
+        //[SerializeField] int weaponDamage = 15;
         [SerializeField] Transform handTransform = null;
-        [SerializeField] AnimatorOverrideController weaponOverride = null;
+        [SerializeField] Weapon weapon = null;
 
         float timeSinceLastAttack = Mathf.Infinity;
         Health target;
@@ -29,7 +28,7 @@ namespace RPG.Combat
 
             if (target == null || target.IsDead()) return;   // if not attacking or target dead then return
 
-            if (Vector3.Distance(transform.position, target.transform.position) <= weaponRange)
+            if (Vector3.Distance(transform.position, target.transform.position) <= weapon.GetRange())
             {
                 GetComponent<Mover>().Cancel(); // if within attacking distance, stop
                 AttackBehavior();
@@ -39,9 +38,9 @@ namespace RPG.Combat
 
         private void SpawnWeapon()
         {
-            Instantiate(weaponPrefab, handTransform);
+            if (weapon == null) return;
             Animator animator = GetComponent<Animator>();
-            if (weaponOverride != null) animator.runtimeAnimatorController = weaponOverride;
+            weapon.Spawn(handTransform, animator);
         }
 
         private void AttackBehavior()
@@ -90,7 +89,7 @@ namespace RPG.Combat
         {
             if (target == null) return;
 
-            target.TakeDamage(weaponDamage);   // Deal damage on attack hit
+            target.TakeDamage(weapon.GetDamage());   // Deal damage on attack hit
         }
     }
 }
