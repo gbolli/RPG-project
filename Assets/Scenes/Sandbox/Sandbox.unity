@@ -676,7 +676,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753317111}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.004469026, y: 0.9941292, z: -0.098181985, w: -0.045250554}
+  m_LocalRotation: {x: -0.0044690287, y: 0.9941292, z: -0.09818196, w: -0.045250587}
   m_LocalPosition: {x: 24.44, y: 4.04, z: -5.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2511,6 +2511,10 @@ PrefabInstance:
       propertyPath: handTransform
       value: 
       objectReference: {fileID: 902610842}
+    - target: {fileID: 543310735514627253, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
+      propertyPath: weaponOverride
+      value: 
+      objectReference: {fileID: 22100000, guid: b77e60dfebc1f4257b25d81a13fb8e11, type: 2}
     - target: {fileID: 1503098822596701336, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
