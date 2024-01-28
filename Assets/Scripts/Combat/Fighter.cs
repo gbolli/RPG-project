@@ -92,14 +92,17 @@ namespace RPG.Combat
         {
             if (target == null) return;
 
-            target.TakeDamage(currentWeapon.GetDamage());   // Deal damage on attack hit
+            if (currentWeapon.HasProjectile()) {
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target);
+            } 
+            else {
+                target.TakeDamage(currentWeapon.GetDamage());   // Deal damage on attack hit
+            }
         }
 
         void Shoot() // Animation Event
         {
-            if (target == null) return;
-
-            target.TakeDamage(currentWeapon.GetDamage());   // Deal damage on attack hit
+            Hit();
         }
 
     }
