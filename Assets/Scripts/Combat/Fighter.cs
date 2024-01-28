@@ -94,5 +94,13 @@ namespace RPG.Combat
 
             target.TakeDamage(currentWeapon.GetDamage());   // Deal damage on attack hit
         }
+
+        void Shoot() // Animation Event
+        {
+            if (target == null) return;
+
+            target.TakeDamage(currentWeapon.GetDamage());   // Deal damage on attack hit
+        }
+
     }
 }
