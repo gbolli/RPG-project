@@ -8,9 +8,14 @@ namespace RPG.Combat {
         [SerializeField] GameObject weaponPrefab = null;
         [SerializeField] float weaponRange = 2f;
         [SerializeField] int weaponDamage = 15;
+        [SerializeField] bool isRightHanded = true;
 
-        public void Spawn(Transform handTransform, Animator animator) {
-            if(weaponPrefab != null) Instantiate(weaponPrefab, handTransform);
+        public void Spawn(Transform rightHand, Transform leftHand, Animator animator) {
+            if (weaponPrefab != null) {
+                Transform handTransform = isRightHanded ? rightHand : leftHand;
+                Instantiate(weaponPrefab, handTransform);
+            }
+
             if(weaponOverride != null) animator.runtimeAnimatorController = weaponOverride;
         }
 
