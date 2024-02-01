@@ -9,12 +9,17 @@ namespace RPG.Combat {
     {
         Health target = null;
         [SerializeField] float speed = 5;
+        [SerializeField] bool isHoming = false;
         int damage = 0;
+
+        private void Start() {
+            transform.LookAt(GetAimLocation());
+        }
        
         void Update()
         {
-            if (target == null) return;
-            transform.LookAt(GetAimLocation());
+            if (target == null || target.IsDead()) return;
+            if (isHoming) transform.LookAt(GetAimLocation());
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
@@ -24,7 +29,7 @@ namespace RPG.Combat {
         }
 
         private void OnTriggerEnter(Collider other) {
-            if (other.GetComponent<Health>() != target) return;
+            if (other.GetComponent<Health>() != target || target.IsDead()) return;
             // apply damage to enemy
             other.GetComponent<Health>().TakeDamage(damage);
             // destroy arrow?   or leave stuck to enemy
