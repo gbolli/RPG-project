@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcc420724093947c08594b24de88e9c0, type: 3}
-  m_Name: Bow
+  m_Name: Bow (Lightning)
   m_EditorClassIdentifier: 
   weaponOverride: {fileID: 22100000, guid: f5aa6c4be3a00438bb4bd05528fdb11a, type: 2}
   weaponPrefab: {fileID: 1298443606973953481, guid: be6abe26a6bad4fe6aa201d6028f8c96, type: 3}
   weaponRange: 10
   weaponDamage: 10
   isRightHanded: 0
-  projectile: {fileID: 1515417353305097905, guid: a7ee3619c7818412e9a4b2567aa285e2, type: 3}
+  projectile: {fileID: 995330759233838260, guid: b4625d435963a4f8ca10fc05bb2dc180, type: 3}
