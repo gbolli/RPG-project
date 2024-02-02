@@ -18,8 +18,8 @@ namespace RPG.Combat {
        
         void Update()
         {
-            if (target == null || target.IsDead()) return;
-            if (isHoming) transform.LookAt(GetAimLocation());
+            if (target == null) return;
+            if (isHoming && !target.IsDead()) transform.LookAt(GetAimLocation());
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
