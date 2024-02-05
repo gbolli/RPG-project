@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: speed
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1515417353305097905, guid: a7ee3619c7818412e9a4b2567aa285e2, type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 5838285030995300256, guid: 7d331275794824257bdd01876f54857e, type: 3}
     - target: {fileID: 4805999821074117163, guid: a7ee3619c7818412e9a4b2567aa285e2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -54,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5211705904968485659, guid: a7ee3619c7818412e9a4b2567aa285e2, type: 3}
       propertyPath: m_Name
-      value: ArrowProjectile Red
+      value: Arrow Projectile Red
       objectReference: {fileID: 0}
     - target: {fileID: 8435501797416552420, guid: a7ee3619c7818412e9a4b2567aa285e2, type: 3}
       propertyPath: m_Parameters.colorGradient.key0.b
