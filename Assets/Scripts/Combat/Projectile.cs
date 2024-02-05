@@ -10,6 +10,7 @@ namespace RPG.Combat {
         Health target = null;
         [SerializeField] float speed = 5;
         [SerializeField] bool isHoming = false;
+        [SerializeField] GameObject hitEffect = null;
         int damage = 0;
 
         private void Start() {
@@ -31,6 +32,7 @@ namespace RPG.Combat {
         private void OnTriggerEnter(Collider other) {
             if (other.GetComponent<Health>() != target || target.IsDead()) return;
             // apply damage to enemy
+            if (hitEffect != null) Instantiate(hitEffect, GetAimLocation(), transform.rotation);
             other.GetComponent<Health>().TakeDamage(damage);
             // destroy arrow?   or leave stuck to enemy
             Destroy(gameObject);
