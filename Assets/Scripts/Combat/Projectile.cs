@@ -11,6 +11,9 @@ namespace RPG.Combat {
         [SerializeField] float speed = 5;
         [SerializeField] bool isHoming = false;
         [SerializeField] GameObject hitEffect = null;
+        [SerializeField] float maxLifeTime = 10f;
+        [SerializeField] float lifeAfterImpact = 2f;
+        [SerializeField] GameObject[] destroyOnHit = null;
         int damage = 0;
 
         private void Start() {
@@ -34,8 +37,12 @@ namespace RPG.Combat {
             // apply damage to enemy
             if (hitEffect != null) Instantiate(hitEffect, GetAimLocation(), transform.rotation);
             other.GetComponent<Health>().TakeDamage(damage);
-            // destroy arrow?   or leave stuck to enemy
-            Destroy(gameObject);
+            // destroy parts on hit
+            foreach (GameObject toDestroy in destroyOnHit) {
+                Destroy(toDestroy);
+            }
+            // destroy completely after time (lifeAfterImpact)
+            Destroy(gameObject, lifeAfterImpact);
         }
 
         private Vector3 GetAimLocation()
