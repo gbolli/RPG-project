@@ -15,13 +15,17 @@ namespace RPG.Combat
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
         [SerializeField] Weapon defaultWeapon = null;
+        [SerializeField] string defaultWeaponName = "Unarmed";
 
         float timeSinceLastAttack = Mathf.Infinity;
         Health target;
         Weapon currentWeapon = null;
 
         private void Start() {
-            EquipWeapon(defaultWeapon);
+            // Grab weapon from Resources
+            Weapon weapon = Resources.Load<Weapon>(defaultWeaponName);
+    
+            EquipWeapon(weapon);
         }
 
         private void Update()
