@@ -1,13 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using RPG.Core;
 using RPG.Movement;
+using RPG.Saving;
 using UnityEngine;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction
+    public class Fighter : MonoBehaviour, IAction, IJsonSaveable
     {
         //[SerializeField] float weaponRange = 2f;
         [SerializeField] float timeBetweenAttacks = 1f;
@@ -15,17 +17,13 @@ namespace RPG.Combat
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
         [SerializeField] Weapon defaultWeapon = null;
-        [SerializeField] string defaultWeaponName = "Unarmed";
 
         float timeSinceLastAttack = Mathf.Infinity;
         Health target;
         Weapon currentWeapon = null;
 
         private void Start() {
-            // Grab weapon from Resources
-            Weapon weapon = Resources.Load<Weapon>(defaultWeaponName);
-    
-            EquipWeapon(weapon);
+            if (currentWeapon == null) EquipWeapon(defaultWeapon);
         }
 
         private void Update()
@@ -109,5 +107,16 @@ namespace RPG.Combat
             Hit();
         }
 
+        public JToken CaptureAsJToken()
+        {
+            return JToken.FromObject(currentWeapon.name);
+        }
+
+        public void RestoreFromJToken(JToken state)
+        {
+            string weaponName = state.ToObject<string>();
+            Weapon weapon = Resources.Load<Weapon>(weaponName);
+            EquipWeapon(weapon);
+        }
     }
 }
