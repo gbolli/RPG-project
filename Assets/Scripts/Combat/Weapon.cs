@@ -29,7 +29,7 @@ namespace RPG.Combat {
             }
             // replace animator controller with weapon override
             if (weaponOverride != null) animator.runtimeAnimatorController = weaponOverride;
-            else Debug.Log("Weapon needs an animator override controller");
+            // else Debug.Log("Unarmed or Weapon needs an animator override controller" + this.name);
         }
 
         private void DestroyOldWeapon(Transform rightHand, Transform leftHand)

@@ -15,8 +15,11 @@ namespace RPG.Attributes
         bool isDead = false;
 
         private void Start() {
+            Debug.Log("Calling GetHealth() for " + this.name + " id: " + this.GetInstanceID());
             health = GetComponent<BaseStats>().GetHealth();
+            
         }
+
         public bool IsDead()
         {
             return isDead;
