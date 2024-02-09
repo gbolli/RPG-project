@@ -2866,6 +2866,10 @@ PrefabInstance:
       propertyPath: startingLevel
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5997024602300988792, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6376179148582871910, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 52.52922
@@ -2877,6 +2881,10 @@ PrefabInstance:
     - target: {fileID: 6376179148582871910, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
       propertyPath: m_LocalPosition.z
       value: 25.000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 6834584887289973027, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7453488729036018342, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
       propertyPath: m_LocalPosition.x
