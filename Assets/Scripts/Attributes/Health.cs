@@ -12,10 +12,12 @@ namespace RPG.Attributes
     {
         [SerializeField] int health = 100;
 
+        // TODO - add player base health (updated when leveling), also avoid looping through progression every frame for display.
+
         bool isDead = false;
 
         private void Start() {
-            Debug.Log("Calling GetHealth() for " + this.name + " id: " + this.GetInstanceID());
+            // Debug.Log("Calling GetHealth() for " + this.name + " id: " + this.GetInstanceID());
             health = GetComponent<BaseStats>().GetHealth();
             
         }
@@ -33,6 +35,11 @@ namespace RPG.Attributes
             {
                 Die();
             }
+        }
+
+        public string GetHealthDisplay() {
+            return health + " / " + GetComponent<BaseStats>().GetHealth();
+            // TODO - use baseHealth variable instead of call to BaseStats (loop is expensive)
         }
 
         private void Die()

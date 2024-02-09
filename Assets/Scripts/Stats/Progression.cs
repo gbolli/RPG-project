@@ -8,11 +8,11 @@ namespace RPG.Stats {
         [SerializeField] ProgressionCharacterClass[] characterClasses = null;
 
         public int GetHealth(CharacterClass characterClass, int level) {
-            Debug.Log(characterClasses[0]);
+            // Debug.Log(characterClasses[0]);
             foreach (ProgressionCharacterClass PCC in characterClasses) {
-                Debug.Log("Checking: " + PCC.characterClass + " " + level);
+                // Debug.Log("Checking: " + PCC.characterClass + " " + level);
                 if (PCC.characterClass == characterClass) {
-                    Debug.Log("Applying " + PCC.characterClass + " health of " + PCC.health[level - 1]);
+                    // Debug.Log("Applying " + PCC.characterClass + " health of " + PCC.health[level - 1]);
                     return PCC.health[level - 1];
                 }
             }
