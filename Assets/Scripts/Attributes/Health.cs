@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using RPG.Core;
 using RPG.Saving;
+using RPG.Stats;
 using UnityEngine;
 
-namespace RPG.Core
+namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, IJsonSaveable
     {
@@ -12,6 +14,9 @@ namespace RPG.Core
 
         bool isDead = false;
 
+        private void Start() {
+            health = GetComponent<BaseStats>().GetHealth();
+        }
         public bool IsDead()
         {
             return isDead;
