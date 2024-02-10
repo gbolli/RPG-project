@@ -14,7 +14,9 @@ namespace RPG.Combat {
         [SerializeField] float maxLifeTime = 8f;
         [SerializeField] float lifeAfterImpact = 2f;
         [SerializeField] GameObject[] destroyOnHit = null;
+
         int damage = 0;
+        GameObject instigator = null;
 
         private void Start() {
             transform.LookAt(GetAimLocation());
@@ -27,9 +29,10 @@ namespace RPG.Combat {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
-        public void SetTarget(Health target, int damage) {
+        public void SetTarget(Health target, GameObject instigator, int damage) {
             this.target = target;
             this.damage = damage;
+            this.instigator = instigator;
 
             Destroy(gameObject, maxLifeTime);
         }
@@ -40,7 +43,7 @@ namespace RPG.Combat {
             speed = 0;
             // apply damage to enemy
             if (hitEffect != null) Instantiate(hitEffect, GetAimLocation(), transform.rotation);
-            other.GetComponent<Health>().TakeDamage(damage);
+            other.GetComponent<Health>().TakeDamage(instigator, damage);
             // destroy parts on hit
             foreach (GameObject toDestroy in destroyOnHit) {
                 Destroy(toDestroy);

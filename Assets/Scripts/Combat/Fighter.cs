@@ -100,10 +100,10 @@ namespace RPG.Combat
             if (target == null) return;
 
             if (currentWeapon.HasProjectile()) {
-                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target);
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject);
             } 
             else {
-                target.TakeDamage(currentWeapon.GetDamage());   // Deal damage on attack hit
+                target.TakeDamage(gameObject, currentWeapon.GetDamage());   // Deal damage on attack hit
             }
         }
 

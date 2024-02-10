@@ -27,7 +27,7 @@ namespace RPG.Attributes
             return isDead;
         }
 
-        public void TakeDamage(int damage)  //  Take damage to health
+        public void TakeDamage(GameObject instigator, int damage)  //  Take damage to health
         {
             health = Mathf.Max(0, health - damage);   // 0 is lowest health
 
