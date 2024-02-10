@@ -33,6 +33,7 @@ namespace RPG.Attributes
 
             if (health <= 0)
             {
+                AwardExperience(instigator);
                 Die();
             }
         }
@@ -49,6 +50,14 @@ namespace RPG.Attributes
 
             GetComponent<Animator>().SetTrigger("die");   // Trigger death animation
             GetComponent<ActionScheduler>().CancelCurrentAction();  // Cancel from action scheduler
+        }
+
+        private void AwardExperience(GameObject instigator)
+        {
+            Experience experience = instigator.GetComponent<Experience>();
+            if (experience == null) return;
+            
+            experience.GainExperience(GetComponent<BaseStats>().GetExperienceReward());
         }
 
         public JToken CaptureAsJToken()

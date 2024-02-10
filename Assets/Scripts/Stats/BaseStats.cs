@@ -14,5 +14,10 @@ namespace RPG.Stats {
             // Debug.Log("BaseStats call: " + characterClass + " " + startingLevel);
             return progression.GetHealth(characterClass, startingLevel);
         }
+
+        public int GetExperienceReward() {
+            return 10;
+            // TODO: replace this placeholder with proper XP calc
+        }
     }
 }
