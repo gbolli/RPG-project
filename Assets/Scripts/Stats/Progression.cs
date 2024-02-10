@@ -13,7 +13,7 @@ namespace RPG.Stats {
                 // Debug.Log("Checking: " + PCC.characterClass + " " + level);
                 if (PCC.characterClass == characterClass) {
                     // Debug.Log("Applying " + PCC.characterClass + " health of " + PCC.health[level - 1]);
-                    return PCC.health[level - 1];
+                    // return PCC.health[level - 1];
                 }
             }
             return 0;
@@ -22,8 +22,15 @@ namespace RPG.Stats {
         [System.Serializable]
         class ProgressionCharacterClass {
             public CharacterClass characterClass;
-            public int[] health = null;
-            public int[] damage = null;
+            public ProgressionStat[] stats;
+            // public int[] health = null;
+            // public int[] damage = null;
+        }
+
+        [System.Serializable]
+        class ProgressionStat {
+            public Stat stat;
+            public int[] levels;
         }
     }
 }
