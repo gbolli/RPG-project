@@ -7,13 +7,14 @@ namespace RPG.Stats {
 
         [SerializeField] ProgressionCharacterClass[] characterClasses = null;
 
-        public int GetHealth(CharacterClass characterClass, int level) {
-            // Debug.Log(characterClasses[0]);
+        public int GetStat(Stat stat, CharacterClass characterClass, int level) {
             foreach (ProgressionCharacterClass PCC in characterClasses) {
-                // Debug.Log("Checking: " + PCC.characterClass + " " + level);
-                if (PCC.characterClass == characterClass) {
-                    // Debug.Log("Applying " + PCC.characterClass + " health of " + PCC.health[level - 1]);
-                    // return PCC.health[level - 1];
+                if (PCC.characterClass != characterClass) continue;
+                foreach (ProgressionStat PS in PCC.stats) {
+                    if (PS.stat != stat) continue;
+                    // guard against out of range level.  TODO: Should stop loop instead of continue?
+                    if (PS.levels.Length < level) continue;
+                    return PS.levels[level - 1];
                 }
             }
             return 0;

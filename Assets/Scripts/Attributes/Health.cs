@@ -16,10 +16,9 @@ namespace RPG.Attributes
 
         bool isDead = false;
 
-        private void Start() {
-            // Debug.Log("Calling GetHealth() for " + this.name + " id: " + this.GetInstanceID());
-            health = GetComponent<BaseStats>().GetHealth();
-            
+        private void Start()
+        {
+            health = GetComponent<BaseStats>().GetStat(Stat.Health);
         }
 
         public bool IsDead()
@@ -39,7 +38,7 @@ namespace RPG.Attributes
         }
 
         public string GetHealthDisplay() {
-            return health + " / " + GetComponent<BaseStats>().GetHealth();
+            return health + " / " + GetComponent<BaseStats>().GetStat(Stat.Health);
             // TODO - use baseHealth variable instead of call to BaseStats (loop is expensive)
         }
 
@@ -57,7 +56,7 @@ namespace RPG.Attributes
             Experience experience = instigator.GetComponent<Experience>();
             if (experience == null) return;
             
-            experience.GainExperience(GetComponent<BaseStats>().GetExperienceReward());
+            experience.GainExperience(GetComponent<BaseStats>().GetStat(Stat.Experience));
         }
 
         public JToken CaptureAsJToken()
