@@ -16,6 +16,11 @@ namespace RPG.Attributes {
             // possibly check for gain level here?
         }
 
+        public string GetExpDisplay() {
+            return "" + experiencePoints; // + " / " + GetComponent<BaseStats>().GetStat(Stat.Experience);
+            // TODO - use baseHealth variable instead of call to BaseStats (loop is expensive)
+        }
+
         public JToken CaptureAsJToken()
         {
             return JToken.FromObject(experiencePoints);

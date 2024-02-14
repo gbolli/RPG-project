@@ -2822,6 +2822,14 @@ PrefabInstance:
       propertyPath: weaponOverride
       value: 
       objectReference: {fileID: 22100000, guid: b77e60dfebc1f4257b25d81a13fb8e11, type: 2}
+    - target: {fileID: 664778504454918480, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 3.899994
+      objectReference: {fileID: 0}
+    - target: {fileID: 664778504454918480, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -20.200012
+      objectReference: {fileID: 0}
     - target: {fileID: 1503098822596701336, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2862,13 +2870,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2298533053746432084, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -4.700012
+      objectReference: {fileID: 0}
+    - target: {fileID: 3307737477656550464, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3307737477656550464, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3958743126273729687, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -4.700012
+      objectReference: {fileID: 0}
     - target: {fileID: 4443703700844018019, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
       propertyPath: startingLevel
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5175856915125374234, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
+      propertyPath: m_text
+      value: 'Enemy: '
+      objectReference: {fileID: 0}
     - target: {fileID: 5997024602300988792, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6277726505281845545, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
+      propertyPath: m_text
+      value: 'XP: '
       objectReference: {fileID: 0}
     - target: {fileID: 6376179148582871910, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2883,8 +2915,16 @@ PrefabInstance:
       value: 25.000004
       objectReference: {fileID: 0}
     - target: {fileID: 6834584887289973027, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
+      propertyPath: m_text
+      value: 'Health: '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6834584887289973027, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7160581921353370296, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -4.700012
       objectReference: {fileID: 0}
     - target: {fileID: 7453488729036018342, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2906,7 +2946,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Core
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6401900033101395678, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
