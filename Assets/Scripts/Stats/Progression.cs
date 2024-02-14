@@ -1,3 +1,8 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace RPG.Stats {
@@ -7,17 +12,32 @@ namespace RPG.Stats {
 
         [SerializeField] ProgressionCharacterClass[] characterClasses = null;
 
+        Dictionary<CharacterClass, Dictionary<Stat, int[]>> lookupTable = null;
+
         public int GetStat(Stat stat, CharacterClass characterClass, int level) {
+            BuildLookupTable();
+
+            int[] levels = lookupTable[characterClass][stat];
+            // guard against out of bounds level
+            return levels.Length > level ? levels[level - 1] : 0;
+        }
+
+        private void BuildLookupTable()
+        {
+            if (lookupTable != null) return;
+
+            lookupTable = new Dictionary<CharacterClass, Dictionary<Stat, int[]>>();
+            var newStat = new Dictionary<Stat, int[]>();
+
             foreach (ProgressionCharacterClass PCC in characterClasses) {
-                if (PCC.characterClass != characterClass) continue;
+                newStat.Clear();
+
                 foreach (ProgressionStat PS in PCC.stats) {
-                    if (PS.stat != stat) continue;
-                    // guard against out of range level.  TODO: Should stop loop instead of continue?
-                    if (PS.levels.Length < level) continue;
-                    return PS.levels[level - 1];
+                    newStat.Add(PS.stat, PS.levels); 
                 }
+
+                lookupTable.Add(PCC.characterClass, newStat);
             }
-            return 0;
         }
 
         [System.Serializable]
