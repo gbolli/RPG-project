@@ -38,14 +38,32 @@ namespace RPG.Stats {
 
                 lookupTable.Add(PCC.characterClass, newStat);
             }
+       
+            PrintLookupTable();
+        }
+
+        public int GetLevels(Stat stat, CharacterClass characterClass) {
+            BuildLookupTable();
+
+            return lookupTable[characterClass][stat].Length;
+        }
+
+        private void PrintLookupTable() {
+            foreach (var PCC in lookupTable) {
+                Debug.Log(PCC.Key);
+                foreach (var stat in PCC.Value) {
+                    Debug.Log(stat.Key);
+                    foreach (int level in stat.Value) {
+                        Debug.Log(level);
+                    }
+                }
+            }
         }
 
         [System.Serializable]
         class ProgressionCharacterClass {
             public CharacterClass characterClass;
             public ProgressionStat[] stats;
-            // public int[] health = null;
-            // public int[] damage = null;
         }
 
         [System.Serializable]

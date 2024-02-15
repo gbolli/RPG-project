@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace RPG.Attributes {
+namespace RPG.Stats {
     public class ExperienceDisplay : MonoBehaviour
     {
         Experience exp;
@@ -15,7 +16,7 @@ namespace RPG.Attributes {
         }
 
         private void Update() {
-            text.text = exp.GetExpDisplay();
+            text.text = exp.GetExp().ToString();
         }
     }
 }
