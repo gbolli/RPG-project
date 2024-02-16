@@ -18,7 +18,6 @@ namespace RPG.Stats {
             BuildLookupTable();
 
             int[] levels = lookupTable[characterClass][stat];
-            Debug.Log($"{characterClass} {stat} {levels[0]}, {levels[1]}, {levels[2]} ... level {level}");
             // guard against out of bounds level
             return levels.Length > level ? levels[level - 1] : 0;
         }
@@ -38,8 +37,8 @@ namespace RPG.Stats {
 
                 lookupTable.Add(PCC.characterClass, newStat);
             }
-       
-            PrintLookupTable();
+            // Debug print
+            // PrintLookupTable();
         }
 
         public int GetLevels(Stat stat, CharacterClass characterClass) {
@@ -48,6 +47,7 @@ namespace RPG.Stats {
             return lookupTable[characterClass][stat].Length;
         }
 
+        // for debugging
         private void PrintLookupTable() {
             Debug.Log("Printing Lookup Table");
             foreach (var PCC in lookupTable) {

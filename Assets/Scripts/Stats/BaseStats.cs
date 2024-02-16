@@ -11,9 +11,7 @@ namespace RPG.Stats {
         [SerializeField] Progression progression = null;
 
         public int GetStat(Stat stat) {
-            int pStat = progression.GetStat(stat, characterClass, GetLevel());
-            Debug.Log("Calling GetStat() from BaseStats for " + this.name + " " + stat + " " + characterClass + " " + pStat);
-            return pStat;
+            return progression.GetStat(stat, characterClass, GetLevel());
         }
 
         public int GetLevel() {
@@ -23,18 +21,14 @@ namespace RPG.Stats {
 
             int currentXP = experience.GetExp();
             int totalLevels = progression.GetLevels(Stat.ExperienceToLevelUp, characterClass);
-            Debug.Log($"{this.name} currentXP: {currentXP}");
+
             for (int level = 1; level <= totalLevels; level++)
             {
                 int nextLevelExp = progression.GetStat(Stat.ExperienceToLevelUp, characterClass, level);
-                Debug.Log($"Next Level Exp: {nextLevelExp}");
-                Debug.Log(this.name + " Iterating level: " + level);
-                if(nextLevelExp > currentXP) {
-                    Debug.Log(this.name + " Returning level: " + level);
-                    return level;
-                }
+
+                if(nextLevelExp > currentXP) return level;
             }
-            Debug.Log(this.name + "Exp over limit, level: " + (totalLevels + 1));
+
             return totalLevels + 1;
         }
     }
