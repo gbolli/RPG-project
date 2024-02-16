@@ -18,6 +18,7 @@ namespace RPG.Stats {
             BuildLookupTable();
 
             int[] levels = lookupTable[characterClass][stat];
+            Debug.Log($"{characterClass} {stat} {levels[0]}, {levels[1]}, {levels[2]} ... level {level}");
             // guard against out of bounds level
             return levels.Length > level ? levels[level - 1] : 0;
         }
@@ -27,10 +28,9 @@ namespace RPG.Stats {
             if (lookupTable != null) return;
             Debug.Log("Building LookupTable");
             lookupTable = new Dictionary<CharacterClass, Dictionary<Stat, int[]>>();
-            var newStat = new Dictionary<Stat, int[]>();
 
             foreach (ProgressionCharacterClass PCC in characterClasses) {
-                newStat.Clear();
+                var newStat = new Dictionary<Stat, int[]>();
 
                 foreach (ProgressionStat PS in PCC.stats) {
                     newStat.Add(PS.stat, PS.levels); 
