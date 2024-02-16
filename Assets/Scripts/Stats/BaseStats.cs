@@ -10,6 +10,12 @@ namespace RPG.Stats {
         [SerializeField] CharacterClass characterClass = CharacterClass.Player;
         [SerializeField] Progression progression = null;
 
+
+        private void Update() {
+            if (gameObject.tag == "Player") {
+                Debug.Log(GetLevel());
+            }
+        }
         public int GetStat(Stat stat) {
             return progression.GetStat(stat, characterClass, GetLevel());
         }
