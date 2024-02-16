@@ -25,7 +25,7 @@ namespace RPG.Stats {
         private void BuildLookupTable()
         {
             if (lookupTable != null) return;
-
+            Debug.Log("Building LookupTable");
             lookupTable = new Dictionary<CharacterClass, Dictionary<Stat, int[]>>();
             var newStat = new Dictionary<Stat, int[]>();
 
@@ -44,11 +44,12 @@ namespace RPG.Stats {
 
         public int GetLevels(Stat stat, CharacterClass characterClass) {
             BuildLookupTable();
-
+            
             return lookupTable[characterClass][stat].Length;
         }
 
         private void PrintLookupTable() {
+            Debug.Log("Printing Lookup Table");
             foreach (var PCC in lookupTable) {
                 Debug.Log(PCC.Key);
                 foreach (var stat in PCC.Value) {
