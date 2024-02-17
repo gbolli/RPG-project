@@ -28,6 +28,10 @@ namespace RPG.SceneManagement
             if (Input.GetKeyDown(KeyCode.S)) {
                 Save();
             }
+            // KeyCode.Backspace needed for MacOS delete key.  Will be in menu in the future.
+            if (Input.GetKeyDown(KeyCode.Backspace)) {
+                Delete();
+            }
         }
 
         public void Load()
@@ -38,6 +42,10 @@ namespace RPG.SceneManagement
         public void Save()
         {
             GetComponent<JsonSavingSystem>().Save(defaultSaveFile);
+        }
+
+        public void Delete() {
+            GetComponent<JsonSavingSystem>().Delete(defaultSaveFile);
         }
     }
 }
