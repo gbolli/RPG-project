@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
@@ -7,13 +8,16 @@ using UnityEngine;
 namespace RPG.Stats {
     public class Experience : MonoBehaviour, IJsonSaveable
     {
+        // public delegate void ExperienceGainedDelegate();   use Action instead
+        public event Action onExperienceGained;
+
         [SerializeField] int experiencePoints = 0;
 
 
         public void GainExperience(int exp) {
             experiencePoints += exp;
-
-            // possibly check for gain level here?
+            // call delegate
+            onExperienceGained();
         }
 
         public int GetExp() {
