@@ -24,7 +24,7 @@ namespace RPG.Stats {
 
         private void UpdateLevel() {
             int newLevel = CalculateLevel();
-            
+
             if (newLevel > currentLevel) {
                 currentLevel = newLevel;
                 print("Levelled Up!");
@@ -32,10 +32,15 @@ namespace RPG.Stats {
         }
 
         public int GetStat(Stat stat) {
-            return progression.GetStat(stat, characterClass, CalculateLevel());
+            return progression.GetStat(stat, characterClass, GetLevel());
         }
 
         public int GetLevel() {
+            // guard against race condition (ensure setting level before using)
+            if (currentLevel < 1) {
+                currentLevel = CalculateLevel();
+            }
+
             return currentLevel;
         }
 
