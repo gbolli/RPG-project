@@ -16,8 +16,8 @@ namespace RPG.SceneManagement
         [SerializeField] int sceneToLoad = -1;
         [SerializeField] DestinationIdentifier destination;
         [SerializeField] Transform spawnPoint;
-        [SerializeField] float fadeOutTime = 0.5f;
-        [SerializeField] float fadeInTime = 1f;
+        [SerializeField] float fadeOutTime = 1f;
+        [SerializeField] float fadeInTime = 2f;
         [SerializeField] float fadeWaitTime = 0.5f;
 
         private void OnTriggerEnter(Collider other)
@@ -38,18 +38,16 @@ namespace RPG.SceneManagement
 
             DontDestroyOnLoad(gameObject);  // prevent destroy when new scene is loaded
             // Portals need to be at scene root level for DontDestroyOnLoad
+
             Fader fader = FindObjectOfType<Fader>();
+            SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
 
             yield return fader.FadeOut(fadeOutTime);
 
             // Save current level before portal
-            SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
             wrapper.Save();
 
             yield return SceneManager.LoadSceneAsync(sceneToLoad);  // LoadSceneAsync return object that unity will use
-            
-            // Need time to load references before loading save file (TODO: look for better solutiuon)
-            yield return new WaitForSeconds(0.5f);
 
             // Load stats (player health, etc) before new location
             wrapper.Load();
