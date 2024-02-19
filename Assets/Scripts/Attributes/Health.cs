@@ -49,6 +49,7 @@ namespace RPG.Attributes
 
         public void TakeDamage(GameObject instigator, int damage)  //  Take damage to health
         {
+            print(gameObject.name + " took damage: " + damage);
             health = Mathf.Max(0, health - damage);   // 0 is lowest health
 
             if (health <= 0)

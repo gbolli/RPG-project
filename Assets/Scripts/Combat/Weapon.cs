@@ -46,9 +46,9 @@ namespace RPG.Combat {
             return isRightHanded ? rightHand : leftHand;
         }
 
-        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator) {
+        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator, int calculatedDamage) {
             Projectile projectileInstance = Instantiate(projectile, GetTransform(rightHand, leftHand).position, Quaternion.identity);
-            projectileInstance.SetTarget(target, instigator, weaponDamage);
+            projectileInstance.SetTarget(target, instigator, calculatedDamage);
         }
 
         public bool HasProjectile() {
