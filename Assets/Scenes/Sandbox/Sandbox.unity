@@ -2870,10 +2870,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4443703700844018019, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
-      propertyPath: startingLevel
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4674712569228507833, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
       propertyPath: experiencePoints
       value: 5

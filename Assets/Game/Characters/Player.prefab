@@ -92,6 +92,10 @@ PrefabInstance:
       propertyPath: characterClass
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7868969391790951858, guid: 5b90fc391ffd841adb16f7ec9eb5bcef, type: 3}
+      propertyPath: levelUpParticleEffect
+      value: 
+      objectReference: {fileID: 680563062181423009, guid: 4dafead69e74d410b9bbffe147077fad, type: 3}
     - target: {fileID: 1869316461384907502, guid: 5b90fc391ffd841adb16f7ec9eb5bcef, type: 3}
       propertyPath: maxSpeed
       value: 6
