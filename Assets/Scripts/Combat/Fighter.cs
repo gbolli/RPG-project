@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, IJsonSaveable
+    public class Fighter : MonoBehaviour, IAction, IJsonSaveable, IModifierProvider
     {
         //[SerializeField] float weaponRange = 2f;
         [SerializeField] float timeBetweenAttacks = 1f;
@@ -96,12 +96,18 @@ namespace RPG.Combat
             return target != null && !target.GetComponent<Health>().IsDead();
         }
 
+        public IEnumerable<int> GetAdditiveModifiers(Stat stat)
+        {   if (stat == Stat.Damage) {
+                yield return currentWeapon.GetDamage();
+            }
+        }
+
         void Hit() // Animation Event
         {
             if (target == null) return;
 
             int damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
-            
+
             if (currentWeapon.HasProjectile()) {
                 currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
             } 

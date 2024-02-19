@@ -44,7 +44,7 @@ namespace RPG.Stats {
         }
 
         public int GetStat(Stat stat) {
-            return progression.GetStat(stat, characterClass, GetLevel());
+            return progression.GetStat(stat, characterClass, GetLevel())  + GetAdditiveModifiers(stat);
         }
 
         public int GetLevel() {
@@ -56,7 +56,7 @@ namespace RPG.Stats {
             return currentLevel;
         }
 
-        public int CalculateLevel() {
+        private int CalculateLevel() {
             // return early if no experience (eg. enemies)
             Experience experience = GetComponent<Experience>();
             if (experience == null) return startingLevel;
@@ -72,6 +72,17 @@ namespace RPG.Stats {
             }
 
             return totalLevels + 1;
+        }
+
+        private int GetAdditiveModifiers(Stat stat)
+        {
+            int sum = 0;
+            foreach (IModifierProvider modifierProvider in GetComponents<IModifierProvider>()) {
+                foreach (int modifier in modifierProvider.GetAdditiveModifiers(stat)) {
+                    sum +=  modifier;
+                }
+            }
+            return sum;
         }
     }
 }
