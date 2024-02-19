@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
@@ -11,6 +12,7 @@ namespace RPG.Attributes
     public class Health : MonoBehaviour, IJsonSaveable
     {
         int health = -1;
+        BaseStats baseStats;
         [SerializeField] int baseHealth = 0;
 
         // TODO - add player base health (updated when leveling), also avoid looping through progression every frame for display.
@@ -19,12 +21,25 @@ namespace RPG.Attributes
 
         private void Start()
         {
+            baseStats = GetComponent<BaseStats>();
             // ensure that this doesn't run after restoring a save
             if (health < 0) {
-                health = GetComponent<BaseStats>().GetStat(Stat.Health);
+                health = baseStats.GetStat(Stat.Health);
             }
             
-            baseHealth = GetComponent<BaseStats>().GetStat(Stat.Health);
+            baseHealth = baseStats.GetStat(Stat.Health);
+
+            baseStats.onLevelUp += LevelUpHealthIncrease;
+        }
+
+        private void LevelUpHealthIncrease()
+        {
+            RegenerateFullHealth();
+        }
+
+        private void RegenerateFullHealth()
+        {
+            health = baseHealth;
         }
 
         public bool IsDead()

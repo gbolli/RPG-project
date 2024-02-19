@@ -6,6 +6,8 @@ using UnityEngine;
 namespace RPG.Stats {
     public class BaseStats : MonoBehaviour
     {
+        public event Action onLevelUp;
+
         [Range(1,99)]
         [SerializeField] int startingLevel = 1;
         [SerializeField] CharacterClass characterClass = CharacterClass.Player;
@@ -21,7 +23,6 @@ namespace RPG.Stats {
             if (experience != null) {
                 experience.onExperienceGained += UpdateLevel;
             }
-
         }
 
         private void UpdateLevel() {
@@ -29,8 +30,11 @@ namespace RPG.Stats {
 
             if (newLevel > currentLevel) {
                 currentLevel = newLevel;
-                print("Instantiate particle effect");
+
                 LevelUpEffect();
+
+                // delegate
+                onLevelUp();
             }
         }
 
