@@ -29,11 +29,14 @@ namespace RPG.Attributes
             
             baseHealth = baseStats.GetStat(Stat.Health);
 
-            baseStats.onLevelUp += LevelUpHealthIncrease;
+            baseStats.onLevelUp += LevelUpHealth;
         }
 
-        private void LevelUpHealthIncrease()
+        private void LevelUpHealth()
         {
+            // update health for new level
+            baseHealth = baseStats.GetStat(Stat.Health);
+            
             RegenerateFullHealth();
         }
 
