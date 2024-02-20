@@ -13,6 +13,8 @@ namespace RPG.Stats {
         [SerializeField] CharacterClass characterClass = CharacterClass.Player;
         [SerializeField] Progression progression = null;
         [SerializeField] GameObject levelUpParticleEffect = null;
+        [SerializeField] bool shouldUseAdditiveModifiers = false;
+        [SerializeField] bool shouldUsePercentageModifiers = false;
 
         int currentLevel = 0;
 
@@ -82,24 +84,31 @@ namespace RPG.Stats {
 
         private int GetAdditiveModifiers(Stat stat)
         {
+            if (!shouldUseAdditiveModifiers) return 0;
+
             int sum = 0;
+
             foreach (IModifierProvider modifierProvider in GetComponents<IModifierProvider>()) {
                 foreach (int modifier in modifierProvider.GetAdditiveModifiers(stat)) {
                     sum +=  modifier;
                 }
             }
+            
             return sum;
         }
 
         private int GetPercentageModifiers(Stat stat)
         {
+            if (!shouldUsePercentageModifiers) return 0;
+            
             int sum = 0;
+
             foreach (IModifierProvider modifierProvider in GetComponents<IModifierProvider>()) {
                 foreach (int modifier in modifierProvider.GetPercentageModifiers(stat)) {
                     sum +=  modifier;
                 }
             }
-            print("Percentage modifier: " + sum);
+
             return sum;
         }
     }
