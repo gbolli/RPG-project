@@ -102,6 +102,13 @@ namespace RPG.Combat
             }
         }
 
+        public IEnumerable<int> GetPercentageModifiers(Stat stat)
+        {
+            if (stat == Stat.Damage) {
+                yield return currentWeapon.GetPercentageBonus();
+            }
+        }
+
         void Hit() // Animation Event
         {
             if (target == null) return;
@@ -132,5 +139,6 @@ namespace RPG.Combat
             Weapon weapon = Resources.Load<Weapon>(weaponName);
             EquipWeapon(weapon);
         }
+
     }
 }

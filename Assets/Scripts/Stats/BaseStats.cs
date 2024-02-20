@@ -43,8 +43,14 @@ namespace RPG.Stats {
             Instantiate(levelUpParticleEffect, transform);
         }
 
-        public int GetStat(Stat stat) {
-            return progression.GetStat(stat, characterClass, GetLevel())  + GetAdditiveModifiers(stat);
+        public int GetStat(Stat stat)
+        {
+            return (int)((GetBaseStat(stat) + GetAdditiveModifiers(stat)) * (1 + (float)GetPercentageModifiers(stat)/100));
+        }
+
+        private int GetBaseStat(Stat stat)
+        {
+            return progression.GetStat(stat, characterClass, GetLevel());
         }
 
         public int GetLevel() {
@@ -82,6 +88,18 @@ namespace RPG.Stats {
                     sum +=  modifier;
                 }
             }
+            return sum;
+        }
+
+        private int GetPercentageModifiers(Stat stat)
+        {
+            int sum = 0;
+            foreach (IModifierProvider modifierProvider in GetComponents<IModifierProvider>()) {
+                foreach (int modifier in modifierProvider.GetPercentageModifiers(stat)) {
+                    sum +=  modifier;
+                }
+            }
+            print("Percentage modifier: " + sum);
             return sum;
         }
     }
