@@ -16,12 +16,10 @@ namespace RPG.SceneManagement
 
         // Rename from Start -> LoadLastScene and call in Awake to prevent race condition issues with other Start methods needing loaded information 
         IEnumerator LoadLastScene() {
-            Fader fader = FindObjectOfType<Fader>();
-
-            fader.FadeOutImmediate();
-
             yield return GetComponent<JsonSavingSystem>().LoadLastScene(defaultSaveFile);
-
+            // fader after yield return to avoid race condition
+            Fader fader = FindObjectOfType<Fader>();
+            fader.FadeOutImmediate();
             yield return fader.FadeIn(fadeInTime);
         }
         const string defaultSaveFile = "save";

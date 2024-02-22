@@ -19,24 +19,33 @@ namespace RPG.Attributes
 
         bool isDead = false;
 
+        private void Awake() {
+            baseStats = GetComponent<BaseStats>();
+        }
+
         private void Start()
         {
-            baseStats = GetComponent<BaseStats>();
             // ensure that this doesn't run after restoring a save
             if (health < 0) {
                 health = baseStats.GetStat(Stat.Health);
             }
             
             baseHealth = baseStats.GetStat(Stat.Health);
+        }
 
+        private void OnEnable() {
             baseStats.onLevelUp += LevelUpHealth;
+        }
+
+        private void OnDisable() {
+            baseStats.onLevelUp -= LevelUpHealth;
         }
 
         private void LevelUpHealth()
         {
             // update health for new level
             baseHealth = baseStats.GetStat(Stat.Health);
-            
+
             RegenerateFullHealth();
         }
 
