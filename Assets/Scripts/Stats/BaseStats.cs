@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameDevTV.Utils;
 using UnityEngine;
 
 namespace RPG.Stats {
@@ -16,15 +17,17 @@ namespace RPG.Stats {
         [SerializeField] bool shouldUseAdditiveModifiers = false;
         [SerializeField] bool shouldUsePercentageModifiers = false;
 
-        int currentLevel = 0;
+        // LazyValue is custom initializer package from GameDevTV to ensure initialization before use
+        LazyValue<int> currentLevel;
         Experience experience;
 
         private void Awake() {
             experience = GetComponent<Experience>();
+            currentLevel = new LazyValue<int>(CalculateLevel);
         }
 
         private void Start() {
-            currentLevel = CalculateLevel();
+            currentLevel.ForceInit();
         }
 
         private void OnEnable() {
@@ -42,8 +45,8 @@ namespace RPG.Stats {
         private void UpdateLevel() {
             int newLevel = CalculateLevel();
 
-            if (newLevel > currentLevel) {
-                currentLevel = newLevel;
+            if (newLevel > currentLevel.value) {
+                currentLevel.value = newLevel;
 
                 LevelUpEffect();
 
@@ -68,12 +71,7 @@ namespace RPG.Stats {
         }
 
         public int GetLevel() {
-            // guard against race condition (ensure setting level before using)
-            if (currentLevel < 1) {
-                currentLevel = CalculateLevel();
-            }
-
-            return currentLevel;
+            return currentLevel.value;
         }
 
         private int CalculateLevel() {

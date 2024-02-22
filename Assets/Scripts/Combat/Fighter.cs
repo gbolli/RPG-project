@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameDevTV.Utils;
 using Newtonsoft.Json.Linq;
 using RPG.Attributes;
 using RPG.Core;
@@ -22,10 +23,16 @@ namespace RPG.Combat
 
         float timeSinceLastAttack = Mathf.Infinity;
         Health target;
-        Weapon currentWeapon = null;
+
+        // LazyValue is custom initializer package from GameDevTV to ensure initialization before use
+        LazyValue<Weapon> currentWeapon;
+
+        private void Awake() {
+            currentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
+        }
 
         private void Start() {
-            if (currentWeapon == null) EquipWeapon(defaultWeapon);
+            currentWeapon.ForceInit();
         }
 
         private void Update()
@@ -34,7 +41,7 @@ namespace RPG.Combat
 
             if (target == null || target.IsDead()) return;   // if not attacking or target dead then return
 
-            if (Vector3.Distance(transform.position, target.transform.position) <= currentWeapon.GetRange())
+            if (Vector3.Distance(transform.position, target.transform.position) <= currentWeapon.value.GetRange())
             {
                 GetComponent<Mover>().Cancel(); // if within attacking distance, stop
                 AttackBehavior();
@@ -42,10 +49,20 @@ namespace RPG.Combat
             else GetComponent<Mover>().MoveTo(target.transform.position, 1f);  // if not within attacking distance, keep moving
         }
 
+        private Weapon SetupDefaultWeapon()
+        {
+            AttachWeapon(defaultWeapon);
+            return defaultWeapon;
+        }
+
         public void EquipWeapon(Weapon weapon)
         {
-            if (weapon == null) return;
-            currentWeapon = weapon;
+            currentWeapon.value = weapon;
+            AttachWeapon(weapon);
+        }
+
+        private void AttachWeapon(Weapon weapon)
+        {
             Animator animator = GetComponent<Animator>();
             weapon.Spawn(rightHandTransform, leftHandTransform, animator);
         }
@@ -98,14 +115,14 @@ namespace RPG.Combat
 
         public IEnumerable<int> GetAdditiveModifiers(Stat stat)
         {   if (stat == Stat.Damage) {
-                yield return currentWeapon.GetDamage();
+                yield return currentWeapon.value.GetDamage();
             }
         }
 
         public IEnumerable<int> GetPercentageModifiers(Stat stat)
         {
             if (stat == Stat.Damage) {
-                yield return currentWeapon.GetPercentageBonus();
+                yield return currentWeapon.value.GetPercentageBonus();
             }
         }
 
@@ -115,8 +132,8 @@ namespace RPG.Combat
 
             int damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
 
-            if (currentWeapon.HasProjectile()) {
-                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
+            if (currentWeapon.value.HasProjectile()) {
+                currentWeapon.value.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
             } 
             else {
                 target.TakeDamage(gameObject, damage); //currentWeapon.GetDamage());   // Deal damage on attack hit
@@ -130,7 +147,7 @@ namespace RPG.Combat
 
         public JToken CaptureAsJToken()
         {
-            return JToken.FromObject(currentWeapon.name);
+            return JToken.FromObject(currentWeapon.value.name);
         }
 
         public void RestoreFromJToken(JToken state)

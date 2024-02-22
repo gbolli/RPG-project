@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameDevTV.Utils;
 using Newtonsoft.Json.Linq;
 using RPG.Core;
 using RPG.Saving;
@@ -11,8 +12,8 @@ namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, IJsonSaveable
     {
-        int health = -1;
-        BaseStats baseStats;
+        // LazyValue is custom initializer package from GameDevTV to ensure initialization before use
+        LazyValue<int> health;
         [SerializeField] int baseHealth = 0;
 
         // TODO - add player base health (updated when leveling), also avoid looping through progression every frame for display.
@@ -20,38 +21,38 @@ namespace RPG.Attributes
         bool isDead = false;
 
         private void Awake() {
-            baseStats = GetComponent<BaseStats>();
+            health = new LazyValue<int>(GetInitialHealth);
         }
 
         private void Start()
-        {
-            // ensure that this doesn't run after restoring a save
-            if (health < 0) {
-                health = baseStats.GetStat(Stat.Health);
-            }
-            
-            baseHealth = baseStats.GetStat(Stat.Health);
+        {   
+            health.ForceInit();
+            baseHealth = GetComponent<BaseStats>().GetStat(Stat.Health);
         }
 
         private void OnEnable() {
-            baseStats.onLevelUp += LevelUpHealth;
+            GetComponent<BaseStats>().onLevelUp += LevelUpHealth;
         }
 
         private void OnDisable() {
-            baseStats.onLevelUp -= LevelUpHealth;
+            GetComponent<BaseStats>().onLevelUp -= LevelUpHealth;
+        }
+
+        private int GetInitialHealth() {
+            return GetComponent<BaseStats>().GetStat(Stat.Health);
         }
 
         private void LevelUpHealth()
         {
             // update health for new level
-            baseHealth = baseStats.GetStat(Stat.Health);
+            baseHealth = GetComponent<BaseStats>().GetStat(Stat.Health);
 
             RegenerateFullHealth();
         }
 
         private void RegenerateFullHealth()
         {
-            health = baseHealth;
+            health.value = baseHealth;
         }
 
         public bool IsDead()
@@ -62,9 +63,9 @@ namespace RPG.Attributes
         public void TakeDamage(GameObject instigator, int damage)  //  Take damage to health
         {
             print(gameObject.name + " took damage: " + damage);
-            health = Mathf.Max(0, health - damage);   // 0 is lowest health
+            health.value = Mathf.Max(0, health.value - damage);   // 0 is lowest health
 
-            if (health <= 0)
+            if (health.value <= 0)
             {
                 AwardExperience(instigator);
                 Die();
@@ -72,7 +73,7 @@ namespace RPG.Attributes
         }
 
         public string GetHealthDisplay() {
-            return health + " / " + baseHealth;
+            return health.value + " / " + baseHealth;
             // TODO - use baseHealth variable instead of call to BaseStats (loop is expensive)
         }
 
@@ -95,14 +96,14 @@ namespace RPG.Attributes
 
         public JToken CaptureAsJToken()
         {
-            return JToken.FromObject(health);
+            return JToken.FromObject(health.value);
         }
 
         public void RestoreFromJToken(JToken state)
         {
-            health = state.ToObject<int>();
+            health.value = state.ToObject<int>();
 
-            if (health <= 0)
+            if (health.value <= 0)
             {
                 Die();
             }
