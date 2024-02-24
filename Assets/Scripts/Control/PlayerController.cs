@@ -6,6 +6,7 @@ using RPG.Movement;
 using UnityEngine;
 using RPG.Attributes;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 namespace RPG.Control
 {
@@ -16,7 +17,8 @@ namespace RPG.Control
         enum CursorType {
             None,
             Movement,
-            Combat
+            Combat,
+            UI
         }
 
         [System.Serializable]
@@ -48,7 +50,11 @@ namespace RPG.Control
 
         private bool InteractWithUI()
         {
-            return EventSystem.current.IsPointerOverGameObject();
+            if (EventSystem.current.IsPointerOverGameObject()) {
+                SetCursor(CursorType.UI);
+                return true;
+            }
+            return false;
         }
 
         private bool InteractWithCombat()  // check raycast to target for combat
