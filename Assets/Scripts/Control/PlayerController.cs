@@ -42,6 +42,7 @@ namespace RPG.Control
                 SetCursor(CursorType.None);
                 return;
             }
+            if (InteractWithComponent()) return;
             if (InteractWithCombat()) return;
             if (InteractWithMovement()) return;
 
@@ -53,6 +54,22 @@ namespace RPG.Control
             if (EventSystem.current.IsPointerOverGameObject()) {
                 SetCursor(CursorType.UI);
                 return true;
+            }
+            return false;
+        }
+
+        private bool InteractWithComponent()
+        {
+            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+            foreach (RaycastHit hit in hits)
+            {
+                IRaycastable[] raycastables = hit.transform.GetComponents<IRaycastable>();
+                foreach (IRaycastable raycastable in raycastables)
+                {
+                    if (raycastable.HandleRaycast(this)) {
+                        return true;
+                    }
+                }
             }
             return false;
         }
