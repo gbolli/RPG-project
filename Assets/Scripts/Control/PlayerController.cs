@@ -7,6 +7,7 @@ using UnityEngine;
 using RPG.Attributes;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
+using UnityEngine.AI;
 
 namespace RPG.Control
 {
@@ -22,6 +23,7 @@ namespace RPG.Control
         }
 
         [SerializeField] CursorMapping[] cursorMappings = null;
+        [SerializeField] float maxNavMeshHitDistance = 1f;
 
         private void Awake()
         {
@@ -69,19 +71,37 @@ namespace RPG.Control
 
         private bool InteractWithMovement()  // raycast to move if not on enemy target (and cancel attack)
         {
-            RaycastHit hit;
-            bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
+            // RaycastHit hit;
+            // bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
+            Vector3 target;
+            bool hasHit = RaycastNavMesh(out target);
+
             if (hasHit)
             {
                 if (Input.GetMouseButton(0))
                 {
                     
-                    GetComponent<Mover>().StartMoveAction(hit.point, 1f);
+                    GetComponent<Mover>().StartMoveAction(target, 1f);   // hit.point
                 }
                 SetCursor(CursorType.Movement);
                 return true;
             }
             return false;
+        }
+
+        private bool RaycastNavMesh(out Vector3 target) {
+            RaycastHit raycastHit;
+            NavMeshHit navMeshHit;
+            target = new Vector3();
+
+            bool hasHit = Physics.Raycast(GetMouseRay(), out raycastHit);
+            if (!hasHit) return false;
+
+            bool isCloseEnough = NavMesh.SamplePosition(raycastHit.point, out navMeshHit, maxNavMeshHitDistance, NavMesh.AllAreas);
+            if (!isCloseEnough) return false;
+
+            target = navMeshHit.position;
+            return true;
         }
 
         RaycastHit[] RayCastAllSorted() {
