@@ -90,17 +90,25 @@ namespace RPG.Control
         }
 
         private bool RaycastNavMesh(out Vector3 target) {
-            RaycastHit raycastHit;
-            NavMeshHit navMeshHit;
             target = new Vector3();
 
+            RaycastHit raycastHit;
             bool hasHit = Physics.Raycast(GetMouseRay(), out raycastHit);
+
             if (!hasHit) return false;
 
+            NavMeshHit navMeshHit;
             bool isCloseEnough = NavMesh.SamplePosition(raycastHit.point, out navMeshHit, maxNavMeshHitDistance, NavMesh.AllAreas);
+
             if (!isCloseEnough) return false;
 
             target = navMeshHit.position;
+
+            // Check if path exists and is complete
+            NavMeshPath path = new NavMeshPath();
+            bool hasPath = NavMesh.CalculatePath(transform.position, target, NavMesh.AllAreas, path);
+            if (!hasPath || path.status != NavMeshPathStatus.PathComplete) return false;
+
             return true;
         }
 
