@@ -2997,14 +2997,6 @@ PrefabInstance:
       propertyPath: experiencePoints
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 5456362776725832226, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
-      propertyPath: m_TrackedObjectOffset.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5456362776725832226, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
-      propertyPath: m_TrackedObjectOffset.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5997024602300988792, guid: 751e6c42682e44cc3bcc40ca59c9a8eb, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25

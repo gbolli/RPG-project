@@ -24,6 +24,7 @@ namespace RPG.Control
 
         [SerializeField] CursorMapping[] cursorMappings = null;
         [SerializeField] float maxNavMeshHitDistance = 1f;
+        [SerializeField] float maxPathLength = 30f;
 
         private void Awake()
         {
@@ -109,7 +110,22 @@ namespace RPG.Control
             bool hasPath = NavMesh.CalculatePath(transform.position, target, NavMesh.AllAreas, path);
             if (!hasPath || path.status != NavMeshPathStatus.PathComplete) return false;
 
+            // Check that path is less than maxPathLength
+            if (GetPathLength(path) > maxPathLength) return false;
+
             return true;
+        }
+
+        private float GetPathLength(NavMeshPath path)
+        {
+            float distance = 0f;
+            if (path.corners.Length < 2) return distance;
+
+            for (int i = 1; i < path.corners.Length; i++) {
+                distance += Vector3.Distance(path.corners[i - 1], path.corners[i]);
+            }
+            
+            return distance;
         }
 
         RaycastHit[] RayCastAllSorted() {
