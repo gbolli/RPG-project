@@ -7,6 +7,7 @@ using RPG.Core;
 using RPG.Saving;
 using RPG.Stats;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace RPG.Attributes
 {
@@ -15,6 +16,7 @@ namespace RPG.Attributes
         // LazyValue is custom initializer package from GameDevTV to ensure initialization before use
         LazyValue<int> health;
         [SerializeField] int baseHealth = 0;
+        [SerializeField] UnityEvent takeDamage;
 
         // TODO - add player base health (updated when leveling), also avoid looping through progression every frame for display.
 
@@ -63,8 +65,11 @@ namespace RPG.Attributes
         public void TakeDamage(GameObject instigator, int damage)  //  Take damage to health
         {
             print(gameObject.name + " took damage: " + damage);
+    
             health.value = Mathf.Max(0, health.value - damage);   // 0 is lowest health
 
+            takeDamage.Invoke();
+            
             if (health.value <= 0)
             {
                 AwardExperience(instigator);
