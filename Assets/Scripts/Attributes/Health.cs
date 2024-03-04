@@ -85,7 +85,11 @@ namespace RPG.Attributes
 
         public string GetHealthDisplay() {
             return health.value + " / " + baseHealth;
-            // TODO - use baseHealth variable instead of call to BaseStats (loop is expensive)
+            // TODO - use base Health variable instead of call to BaseStats (loop is expensive)
+        }
+
+        public float GetPercentageHealth() {
+            return (float)health.value / baseHealth;
         }
 
         private void Die()
