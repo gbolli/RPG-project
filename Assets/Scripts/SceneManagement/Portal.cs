@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.AI;
+using RPG.Control;
 
 namespace RPG.SceneManagement
 {
@@ -42,12 +43,19 @@ namespace RPG.SceneManagement
             Fader fader = FindObjectOfType<Fader>();
             SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
 
+            // Remove last scene player controls to avoid multiple transitions if re-entering portal immediately
+            GameObject.FindWithTag("Player").GetComponent<PlayerController>().enabled = false;
+
             yield return fader.FadeOut(fadeOutTime);
 
             // Save current level before portal
             wrapper.Save();
 
             yield return SceneManager.LoadSceneAsync(sceneToLoad);  // LoadSceneAsync return object that unity will use
+
+            // Remove new scene player controls to avoid multiple transitions if re-entering portal immediately (after new scene loads)
+            PlayerController newPlayerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            newPlayerController.enabled = false;
 
             // Load stats (player health, etc) before new location
             wrapper.Load();
@@ -60,6 +68,9 @@ namespace RPG.SceneManagement
 
             yield return new WaitForSeconds(fadeWaitTime);
             yield return fader.FadeIn(fadeInTime);
+
+            // Restore player controls
+            newPlayerController.enabled = true;
 
             Destroy(gameObject);  // destroy to clean up after code is run
         }
