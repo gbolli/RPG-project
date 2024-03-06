@@ -67,6 +67,8 @@ namespace RPG.SceneManagement
             wrapper.Save();
 
             yield return new WaitForSeconds(fadeWaitTime);
+
+            // ??? - possible change for future use coroutines instead?   Tutorial: RPG Core Combat -> Final Polish -> Coroutine Race Conditions
             yield return fader.FadeIn(fadeInTime);
 
             // Restore player controls
