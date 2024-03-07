@@ -17,6 +17,8 @@ namespace RPG.Attributes
         LazyValue<int> health;
         [SerializeField] int baseHealth = 0;
 
+        [SerializeField] UnityEvent onDie;
+
         // Using custom class "TakeDamageEvent" below
         [SerializeField] TakeDamageEvent takeDamage;
 
@@ -78,6 +80,7 @@ namespace RPG.Attributes
 
             if (health.value <= 0)
             {
+                onDie.Invoke();
                 AwardExperience(instigator);
                 Die();
             }
