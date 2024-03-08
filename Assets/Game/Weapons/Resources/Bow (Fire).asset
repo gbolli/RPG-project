@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bow (Fire)
   m_EditorClassIdentifier: 
   weaponOverride: {fileID: 22100000, guid: f5aa6c4be3a00438bb4bd05528fdb11a, type: 2}
-  weaponPrefab: {fileID: 1298443606973953481, guid: be6abe26a6bad4fe6aa201d6028f8c96, type: 3}
+  weaponPrefab: {fileID: -138471019287641993, guid: be6abe26a6bad4fe6aa201d6028f8c96, type: 3}
   weaponRange: 15
   weaponDamage: 5
   percentageBonus: 0
