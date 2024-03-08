@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   weaponOverride: {fileID: 22100000, guid: b77e60dfebc1f4257b25d81a13fb8e11, type: 2}
-  weaponPrefab: {fileID: 2587693431698556664, guid: 4c503c0f86f36436ca5d14c9f0879f9e, type: 3}
+  weaponPrefab: {fileID: 5337034030441189518, guid: 4c503c0f86f36436ca5d14c9f0879f9e, type: 3}
   weaponRange: 2
-  weaponDamage: 5
+  weaponDamage: 12
   percentageBonus: 0
   isRightHanded: 1
   projectile: {fileID: 0}

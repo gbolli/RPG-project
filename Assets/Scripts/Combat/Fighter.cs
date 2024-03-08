@@ -131,6 +131,8 @@ namespace RPG.Combat
         {
             if (target == null) return;
 
+            if (currentWeapon.value != null) currentWeapon.value.OnHit();
+
             int damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
 
             if (currentWeaponConfig.HasProjectile()) {
