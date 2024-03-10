@@ -95,6 +95,10 @@ namespace RPG.Attributes
             return (float)health.value / baseHealth;
         }
 
+        public void Heal(int healthToAdd) {
+            health.value = Mathf.Min(health.value + healthToAdd, baseHealth);
+        }
+
         private void Die()
         {
             if (isDead) return;
