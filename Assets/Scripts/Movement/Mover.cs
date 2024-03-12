@@ -13,6 +13,7 @@ namespace RPG.Movement
     public class Mover : MonoBehaviour, IAction, IJsonSaveable
     {
         [SerializeField] float maxSpeed = 6f;
+        [SerializeField] float maxPathLength = 30f;
 
         NavMeshAgent navmeshAgent;
         Animator animator;
@@ -42,6 +43,30 @@ namespace RPG.Movement
             
             GetComponent<ActionScheduler>().StartAction(this);
             MoveTo(destination, speedFraction);
+        }
+
+        public bool CanMoveTo(Vector3 destination) {
+            // Check if path exists and is complete
+            NavMeshPath path = new NavMeshPath();
+            bool hasPath = NavMesh.CalculatePath(transform.position, destination, NavMesh.AllAreas, path);
+            if (!hasPath || path.status != NavMeshPathStatus.PathComplete) return false;
+
+            // Check that path is less than maxPathLength
+            if (GetPathLength(path) > maxPathLength) return false;
+
+            return true;
+        }
+
+        private float GetPathLength(NavMeshPath path)
+        {
+            float distance = 0f;
+            if (path.corners.Length < 2) return distance;
+
+            for (int i = 1; i < path.corners.Length; i++) {
+                distance += Vector3.Distance(path.corners[i - 1], path.corners[i]);
+            }
+            
+            return distance;
         }
 
         public void MoveTo(Vector3 destination, float speedFraction)   // move to destination and restart navmeshAgent if stopped
