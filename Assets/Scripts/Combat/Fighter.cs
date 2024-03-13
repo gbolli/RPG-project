@@ -43,7 +43,7 @@ namespace RPG.Combat
 
             if (target == null || target.IsDead()) return;   // if not attacking or target dead then return
 
-            if (Vector3.Distance(transform.position, target.transform.position) <= currentWeaponConfig.GetRange())
+            if (GetIsInWeaponRange(target.transform))
             {
                 GetComponent<Mover>().Cancel(); // if within attacking distance, stop
                 AttackBehavior();
@@ -72,6 +72,11 @@ namespace RPG.Combat
             return target;
         }
 
+        private bool GetIsInWeaponRange(Transform targetTransform)
+        {
+            return Vector3.Distance(transform.position, targetTransform.position) <= currentWeaponConfig.GetRange();
+        }
+
         private void AttackBehavior()
         {
             transform.LookAt(target.transform); // look at target when attacking
@@ -81,7 +86,6 @@ namespace RPG.Combat
                 TriggerAttack();  // separate method
                 timeSinceLastAttack = 0;
             }
-
         }
 
         private void TriggerAttack()
@@ -109,11 +113,15 @@ namespace RPG.Combat
             GetComponent<Animator>().SetTrigger("stopAttack");  // stop the attack animation
         }
 
-        public bool CanAttack(GameObject target)
+        public bool CanAttack(GameObject combatTarget)
         {
-            return target != null 
-                && !target.GetComponent<Health>().IsDead() 
-                && GetComponent<Mover>().CanMoveTo(target.transform.position);
+            if (!GetComponent<Mover>().CanMoveTo(combatTarget.transform.position) && 
+                !GetIsInWeaponRange(combatTarget.transform)) 
+                {
+                    return false;
+                }
+
+            return combatTarget != null && !combatTarget.GetComponent<Health>().IsDead();
         }
 
         public IEnumerable<int> GetAdditiveModifiers(Stat stat)
