@@ -16,6 +16,7 @@ namespace RPG.Control
         [SerializeField] float agroCooldownTime = 5f;
         [SerializeField] float waypointDwellTime = 3f;
         [SerializeField] float waypointTolerance = 1f;
+        [SerializeField] float shoutDistance = 8f;
 
         [SerializeField] PatrolPath patrolPath;
         [Range(0,1)]
@@ -78,6 +79,17 @@ namespace RPG.Control
         {
             timeSinceLastSawPlayer = 0;
             fighter.Attack(player);
+
+            AggrevateNearbyEnemies();
+        }
+
+        private void AggrevateNearbyEnemies()
+        {
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, shoutDistance, Vector3.up, 0);
+            foreach (RaycastHit hit in hits) {
+                AIController ai = hit.collider.GetComponent<AIController>();
+                if (ai != null) ai.Aggrevate();
+            }
         }
 
         private void SuspicionBehavior()  // Suspicious state
@@ -129,7 +141,7 @@ namespace RPG.Control
         {
             float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
             if (distanceToPlayer < chaseDistance) Aggrevate();
-            
+
             return timeSinceAggrevated < agroCooldownTime;
         }
 
